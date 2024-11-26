@@ -28,7 +28,7 @@ import { ProductQuotationTypes } from "./productQuotation.types";
 import { steelLine, columns } from "./components/steelTable/columns";
 import { DataTable } from "./components/steelTable/steelTable";
 
-function getData(): Promise<steelLine[]> {
+function getData(): steelLine[] {
   // Fetch data from your API here.
   return [
     {
@@ -40,6 +40,8 @@ function getData(): Promise<steelLine[]> {
       width: 1,
       thickness: "22",
       bend: 4,
+      weight: 0,
+      area: 0,
     },
   ];
 }

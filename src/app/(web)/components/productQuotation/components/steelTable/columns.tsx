@@ -25,7 +25,7 @@ export type steelLine = {
     | "5/16"
     | "3/8"
     | "1/2";
-  bends: number | undefined;
+  bend: number | undefined;
   weight: number | undefined;
   area: number | undefined;
 };
