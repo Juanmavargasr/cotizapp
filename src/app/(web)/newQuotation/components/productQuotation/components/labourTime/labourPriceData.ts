@@ -1,0 +1,20 @@
+export const labourData = [
+    { labour: "Punch Press Setup", price: 1575 },
+    { labour: "Bending Machine Setup", price: 646 },
+    { labour: "Laser Cutting CR (in minutes)", price: 3244 },
+    { labour: "Laser Cutting Inox (in minutes)", price: 3497 },
+    { labour: "Tube Cutting (in minutes)", price: 260 },
+    { labour: "Shearing Cutting (in minutes)", price: 260 },
+    { labour: "Die Cutting (in minutes)", price: 260 },
+    { labour: "Punching (in minutes)", price: 1011 },
+    { labour: "Number of Bends", price: 249 },
+    { labour: "Welding (in minutes)", price: 317 },
+    { labour: "Polishing (in minutes)", price: 275 },
+    { labour: "Washing (in minutes)", price: 228 },
+    { labour: "Painting Setup (in minutes)", price: 228 },
+    { labour: "Painting (in minutes)", price: 317 },
+    { labour: "Baking Setup (in minutes)", price: 228 },
+    { labour: "Cabinet Making", price: 292 },
+    { labour: "Assembly (in minutes)", price: 275 },
+    { labour: "Packaging (in minutes)", price: 228 }
+];

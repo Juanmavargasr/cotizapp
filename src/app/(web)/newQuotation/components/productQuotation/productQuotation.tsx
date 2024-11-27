@@ -11,6 +11,8 @@ import { Input } from "@/components/ui/input";
 
 import SteelTable from "./components/steelTable/steelTable";
 import BasicQuotationData from "./components/basicData/basicQuotationData";
+import LabourTime from "./components/labourTime/labourTime";
+import OtherMaterialsData from "./components/otherMaterials/otherMaterialsTable";
 
 const ProductQuotation = () => {
   return (
@@ -58,8 +60,7 @@ const ProductQuotation = () => {
               <strong>Other materials data</strong>
             </AccordionTrigger>
             <AccordionContent>
-              Yes. It&apos;s animated by default, but you can disable it if you
-              prefer.
+              <OtherMaterialsData />
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-4">
@@ -67,8 +68,7 @@ const ProductQuotation = () => {
               <strong>labour time</strong>
             </AccordionTrigger>
             <AccordionContent>
-              Yes. It&apos;s animated by default, but you can disable it if you
-              prefer.
+              <LabourTime />
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-5">
