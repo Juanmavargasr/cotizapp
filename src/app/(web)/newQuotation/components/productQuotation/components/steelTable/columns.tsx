@@ -32,10 +32,13 @@ import { z } from "zod";
 
 export const steelLineSchema = z.object({
   id: z.string().optional(),
-  material: z.enum(["CR", "INOX", "GV", "PAINT"]),
+  material: z.enum(["CR", "INOX", "GV", "PAINT"], {
+    message: "Cold Rolled steel price must be at least 4 characters.",
+  }),
   partName: z.string(),
   length: z.number().positive(),
   width: z.number().positive(),
+  qty: z.number().positive().gte(3),
   thickness: z.enum([
     "24",
     "22",
@@ -51,7 +54,7 @@ export const steelLineSchema = z.object({
     "3/8",
     "1/2",
   ]),
-  bends: z.number().int().optional(),
+  bend: z.number().int().optional(),
   weight: z.number().positive().optional(),
   area: z.number().positive().optional(),
 });
