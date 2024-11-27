@@ -25,26 +25,7 @@ import { z } from "zod";
 
 import { ProductQuotationTypes } from "./productQuotation.types";
 
-import { steelLine, columns } from "./components/steelTable/columns";
-import { DataTable } from "./components/steelTable/steelTable";
-
-function getData(): steelLine[] {
-  // Fetch data from your API here.
-  return [
-    {
-      id: "123",
-      material: "CR",
-      qty: 1,
-      partName: "abc",
-      length: 1,
-      width: 1,
-      thickness: "22",
-      bend: 4,
-      weight: 0,
-      area: 0,
-    },
-  ];
-}
+import SteelTable from "./components/steelTable/steelTable";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -110,8 +91,6 @@ const ProductQuotation = ({
       username: "",
     },
   });
-
-  const data = getData();
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
@@ -257,7 +236,7 @@ const ProductQuotation = ({
                 </AccordionTrigger>
                 <AccordionContent>
                   <div className="container mx-auto py-10">
-                    <DataTable columns={columns} data={data} />
+                    <SteelTable />
                   </div>
                 </AccordionContent>
               </AccordionItem>

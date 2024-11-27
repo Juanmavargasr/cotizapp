@@ -1,98 +1,98 @@
-"use client";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
-// import { Button } from "@/components/ui/button";
-// import {
-//   Form,
-//   FormControl,
-//   FormDescription,
-//   FormField,
-//   FormItem,
-//   FormLabel,
-//   FormMessage,
-// } from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-// import { zodResolver } from "@hookform/resolvers/zod";
-// import { useForm } from "react-hook-form";
-// import { z } from "zod";
+import { steelLineSchema } from "./columns";
 
-// import { steelLineSchema } from "./columns";
-
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
-}
-
-export function DataTable<TData, TValue>({
-  columns,
-  data,
-}: DataTableProps<TData, TValue>) {
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
+const SteelTable = () => {
+  const form = useForm<z.infer<typeof steelLineSchema>>({
+    resolver: zodResolver(steelLineSchema),
   });
 
+  function onSubmit(values: z.infer<typeof steelLineSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    console.log(values);
+  }
+
   return (
-    <div className="rounded-md border">
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </TableHead>
-                );
-              })}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
-                    <Input />
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </div>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <div className="flex flex-col">
+          <div className="flex flex-row">
+            <p>Part name</p>
+            <Input />
+          </div>
+          <div className="flex flex-row jus">
+            <div className="flex flex-col w-[50%]">
+              <div className="flex flex-row">
+                {" "}
+                <p>material</p>
+                <FormField
+                  control={form.control}
+                  name="material"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input
+                          placeholder="shadcn"
+                          {...field}
+                          className="h-8"
+                          defaultValue={"aaaa"}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="flex flex-row">
+                {" "}
+                <p>length</p>
+                <Input />
+              </div>
+              <div className="flex flex-row">
+                {" "}
+                <p>width</p>
+                <Input />
+              </div>
+            </div>
+            <div className="flex flex-col w-[50%]">
+              <div className="flex flex-row">
+                {" "}
+                <p>qty</p>
+                <Input />
+              </div>
+              <div className="flex flex-row">
+                {" "}
+                <p>thickness</p>
+                <Input />
+              </div>
+              <div className="flex flex-row">
+                {" "}
+                <p>bend</p>
+                <Input />
+              </div>
+            </div>
+          </div>
+        </div>
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
   );
-}
+};
+
+export default SteelTable;
