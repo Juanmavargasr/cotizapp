@@ -1,8 +1,40 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
+import { Button } from "@/components/ui/button";
+import { createNewQuotation } from "./(web)/newQuotation/actions/createNewQuotation";
+import { createNewProduct } from "./(web)/newQuotation/actions/createNewProduct";
+
 export default function Home() {
+  const [createQuotation, setCreateQuotation] = useState(false);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (createQuotation === true) {
+      const goToNewQuotation = async () => {
+        const data = await createNewQuotation();
+        const productId = await createNewProduct(data.id);
+        router.push(`/newQuotation?id=${data.id}&productId=${productId.id}`);
+      };
+      goToNewQuotation();
+    }
+  }, [createQuotation]);
+
+  // const redirect;
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <Button
+        className="w-[180px] bg-green-600 hover:bg-green-800"
+        onClick={() => setCreateQuotation(true)}
+      >
+        {" "}
+        new Quotation
+      </Button>
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"
