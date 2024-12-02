@@ -2,6 +2,7 @@
 
 import { Input } from "@/components/ui/input";
 import { otherProductsData } from "./materialsData";
+import { Button } from "@/components/ui/button";
 
 import { useState } from "react";
 
@@ -32,7 +33,7 @@ const OtherMaterialsData = () => {
   return (
     <div className="w-full mt-4 p-4 ">
       <form action="">
-        <div className="flex flex-col">
+        <div className="flex flex-col g-4">
           <div className=" flex flex-row justify-center gap-4">
             <div className="flex flex-col w-[30%] gap-4">
               <p>
@@ -84,6 +85,14 @@ const OtherMaterialsData = () => {
               </p>
               <Input type="text" className="h-4" />
             </div>
+          </div>
+          <div className="flex mt-8 justify-center">
+            <Button
+              type="submit"
+              className="w-[180px] bg-green-600 hover:bg-green-800"
+            >
+              Add
+            </Button>
           </div>
         </div>
       </form>

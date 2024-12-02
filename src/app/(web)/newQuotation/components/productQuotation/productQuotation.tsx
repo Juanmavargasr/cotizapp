@@ -13,6 +13,7 @@ import SteelTable from "./components/steelTable/steelTable";
 import BasicQuotationData from "./components/basicData/basicQuotationData";
 import LabourTime from "./components/labourTime/labourTime";
 import OtherMaterialsData from "./components/otherMaterials/otherMaterialsTable";
+import SummaryTable from "./components/summary/summaryTable";
 
 const ProductQuotation = () => {
   return (
@@ -76,8 +77,7 @@ const ProductQuotation = () => {
               <strong>Summary</strong>
             </AccordionTrigger>
             <AccordionContent>
-              Yes. It&apos;s animated by default, but you can disable it if you
-              prefer.
+              <SummaryTable />
             </AccordionContent>
           </AccordionItem>
         </Accordion>

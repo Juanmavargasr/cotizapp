@@ -200,7 +200,7 @@ const SteelTable = () => {
             type="submit"
             className="w-[180px] bg-green-600 hover:bg-green-800"
           >
-            Submit
+            Add
           </Button>
         </div>
       </form>
