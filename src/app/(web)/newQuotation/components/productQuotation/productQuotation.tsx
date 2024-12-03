@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import {
   Accordion,
   AccordionContent,
@@ -14,8 +16,21 @@ import BasicQuotationData from "./components/basicData/basicQuotationData";
 import LabourTime from "./components/labourTime/labourTime";
 import OtherMaterialsData from "./components/otherMaterials/otherMaterialsTable";
 import SummaryTable from "./components/summary/summaryTable";
+import { getUpdatedBasicData } from "../../actions/getBasicData";
+import { BasicDataTypes } from "./components/basicData/basicData.types";
 
 const ProductQuotation = () => {
+  const [basicData, setBasicData] = useState<BasicDataTypes | null>(null);
+
+  useEffect(() => {
+    const fetchBasicData = async () => {
+      const data = await getUpdatedBasicData();
+      console.log("*******************************", data);
+      setBasicData(data);
+    };
+    fetchBasicData();
+  }, []);
+
   return (
     <div>
       <div className="flex flex-col w-[800px] m-4 sticky">
@@ -38,11 +53,11 @@ const ProductQuotation = () => {
             </AccordionTrigger>
             <AccordionContent>
               <BasicQuotationData
-                coldRolledPrice={4000}
-                stainlessSteelPrice={13000}
-                galvanizedSteelPrice={7000}
-                paintPrice={23000}
-                comercializedRentability={25}
+                coldRolledPrice={basicData?.coldRolledPrice || 0}
+                stainlessSteelPrice={basicData?.stainlessSteelPrice || 0}
+                galvanizedSteelPrice={basicData?.galvanizedSteelPrice || 0}
+                paintPrice={basicData?.paintPrice || 0}
+                comercializedRentability={basicData?.coldRolledPrice || 0}
               />
             </AccordionContent>
           </AccordionItem>
