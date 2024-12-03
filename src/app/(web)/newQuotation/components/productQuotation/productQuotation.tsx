@@ -25,7 +25,7 @@ const ProductQuotation = () => {
   useEffect(() => {
     const fetchBasicData = async () => {
       const data = await getUpdatedBasicData();
-      console.log("*******************************", data);
+      // console.log("*******************************", data);
       setBasicData(data);
     };
     fetchBasicData();
@@ -57,7 +57,9 @@ const ProductQuotation = () => {
                 stainlessSteelPrice={basicData?.stainlessSteelPrice || 0}
                 galvanizedSteelPrice={basicData?.galvanizedSteelPrice || 0}
                 paintPrice={basicData?.paintPrice || 0}
-                comercializedRentability={basicData?.coldRolledPrice || 0}
+                comercializedRentability={
+                  basicData?.comercializedRentability || 0
+                }
               />
             </AccordionContent>
           </AccordionItem>

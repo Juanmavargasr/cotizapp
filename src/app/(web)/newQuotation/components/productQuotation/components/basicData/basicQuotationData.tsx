@@ -57,12 +57,11 @@ const formSchema = z.object({
     }),
   comercializedRentability: z
     .number()
-    .int()
     .gte(0, {
-      message: "Galvanized steel price must be at least 4 characters.",
+      message: "Comercialized rentability must be at least 0.",
     })
     .lte(2, {
-      message: "Galvanized steel price must be max 5 characters.",
+      message: "Comercialized rentability must be less than or equal to 2.",
     }),
 });
 
@@ -186,7 +185,7 @@ const BasicQuotationData = ({
                       placeholder="shadcn"
                       {...field}
                       className="h-8"
-                      defaultValue={comercializedRentability}
+                      defaultValue={comercializedRentability * 100}
                     />
                   </FormControl>
                   <FormMessage />
