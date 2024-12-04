@@ -6,6 +6,7 @@ import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
 import { createNewQuotation } from "./(web)/newQuotation/actions/createNewQuotation";
+import { createNewProduct } from "./(web)/newQuotation/actions/createNewProduct";
 
 export default function Home() {
   const [createQuotation, setCreateQuotation] = useState(false);
@@ -16,8 +17,9 @@ export default function Home() {
     if (createQuotation === true) {
       const goToNewQuotation = async () => {
         const data = await createNewQuotation();
+        const productId = await createNewProduct(data.id);
         console.log("*********************", data.id);
-        router.push(`/newQuotation?id=${data.id}`);
+        router.push(`/newQuotation?id=${data.id}&productId=${productId.id}`);
       };
       goToNewQuotation();
     }

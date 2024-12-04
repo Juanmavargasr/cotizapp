@@ -5,10 +5,10 @@ import { db } from '@/server/db';
 
 export const createNewQuotation = async () => {
   try {
-    const newQuotation = await db.quotations.create({
+    const newQuotation = await db.quotation.create({
         data: {
           subtotalValueQuotation: 0,
-          taxCalueQuoatation: 0, 
+          taxValueQuoatation: 0, 
           finalValueQuotation: 0,
         },
       });    
