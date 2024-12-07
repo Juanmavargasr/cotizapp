@@ -18,7 +18,6 @@ export default function Home() {
       const goToNewQuotation = async () => {
         const data = await createNewQuotation();
         const productId = await createNewProduct(data.id);
-        console.log("*********************", data.id);
         router.push(`/newQuotation?id=${data.id}&productId=${productId.id}`);
       };
       goToNewQuotation();
