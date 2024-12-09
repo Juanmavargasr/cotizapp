@@ -1,21 +1,21 @@
 // import { Button } from "@/components/ui/button";
+"use client";
+
+import { useSearchParams } from "next/navigation";
 
 import styles from "./newQuiotation.module.scss";
-import ProductQuotation from "../components/productQuotation/productQuotation";
+import ProductQuotation from "./components/productQuotation/productQuotation";
 
 export default function Page() {
+  const searchParams = useSearchParams();
+
+  const quotationId = searchParams.get("id");
   return (
     <div className="flex flex-col w-full justify-center items-center">
       <div className="w-[800px] justify-center items-center">
-        <p className={styles.title}>Quote #C2026</p>
+        <p className={styles.title}>Quote #{quotationId}</p>
 
-        <ProductQuotation
-          coldRolledPrice={4000}
-          stainlessSteelPrice={13000}
-          galvanizedSteelPrice={7000}
-          paintPrice={23000}
-          comercializedRentability={25}
-        />
+        <ProductQuotation />
       </div>
     </div>
   );
