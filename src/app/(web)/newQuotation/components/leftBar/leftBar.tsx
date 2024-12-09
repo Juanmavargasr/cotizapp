@@ -12,7 +12,7 @@ import { getQuotationProducts } from "../../actions/getQuotationProducts";
 import { createNewProduct } from "../../actions/createNewProduct";
 import { deleteProduct } from "../../actions/deleteProduct";
 
-const LeftBar = (quotationId: { quotationId: string }) => {
+const LeftBar = () => {
   const router = useRouter();
 
   const [products, setProducts] = useState<productTypes[]>([]);
@@ -20,7 +20,6 @@ const LeftBar = (quotationId: { quotationId: string }) => {
   const [deleteProductF, setDeleteProductF] = useState(false);
 
   const searchParams = useSearchParams();
-  const numberQId = parseInt(quotationId.quotationId);
 
   const productId =
     searchParams.get("productId") !== null
@@ -40,8 +39,8 @@ const LeftBar = (quotationId: { quotationId: string }) => {
       }
     };
 
-    fetchQuotationProducts(numberQId);
-  }, [numberQId]);
+    fetchQuotationProducts(quotationIdParam);
+  }, [quotationIdParam]);
 
   useEffect(() => {
     if (createProduct === true) {
@@ -49,10 +48,12 @@ const LeftBar = (quotationId: { quotationId: string }) => {
         const newProduct = await createNewProduct(quotationIdParam);
         setCreateProduct(false);
         setProducts((prevProducts) => [...prevProducts, newProduct]);
-        router.push(`/newQuotation?id=${numberQId}&productId=${newProduct.id}`);
+        router.push(
+          `/newQuotation?id=${quotationIdParam}&productId=${newProduct.id}`
+        );
       };
 
-      handleCreateProduct(numberQId);
+      handleCreateProduct(quotationIdParam);
     }
   }, [createProduct]);
 
@@ -70,7 +71,7 @@ const LeftBar = (quotationId: { quotationId: string }) => {
             prevProducts.filter((product) => product.id !== productId)
           );
           router.push(
-            `/newQuotation?id=${numberQId}&productId=${products[0].id}`
+            `/newQuotation?id=${quotationIdParam}&productId=${products[0].id}`
           );
         };
         handleDeleteProduct(productId);
