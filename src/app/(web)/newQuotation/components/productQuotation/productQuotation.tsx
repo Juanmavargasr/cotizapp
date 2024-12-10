@@ -53,12 +53,12 @@ const ProductQuotation = () => {
             </AccordionTrigger>
             <AccordionContent>
               <BasicQuotationData
-                coldRolledPrice={basicData?.coldRolledPrice || 0}
-                stainlessSteelPrice={basicData?.stainlessSteelPrice || 0}
-                galvanizedSteelPrice={basicData?.galvanizedSteelPrice || 0}
-                paintPrice={basicData?.paintPrice || 0}
-                comercializedRentability={
-                  basicData?.comercializedRentability || 0
+                coldrolledprice={basicData?.coldrolledprice || 0}
+                stainlesssteelprice={basicData?.stainlesssteelprice || 0}
+                galvanizedsteelprice={basicData?.galvanizedsteelprice || 0}
+                paintprice={basicData?.paintprice || 0}
+                comercializedrentability={
+                  basicData?.comercializedrentability || 0
                 }
               />
             </AccordionContent>

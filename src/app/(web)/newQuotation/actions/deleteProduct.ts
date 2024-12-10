@@ -3,7 +3,6 @@
 import { db } from '@/server/db';
 
 export const deleteProduct = async (productId: number) => {  
-    console.log('****************************PID', productId)
   try {
     const deletedProduct = await db.product.deleteMany({
       where: {

@@ -5,17 +5,17 @@ import { db } from '@/server/db';
 
 export const getUpdatedBasicData = async () => {
   try {
-    const basicData = await db.basicData.findMany({
+    const basicData = await db.basicdata.findMany({
       
       });
 
       const finalData =
       {
-        coldRolledPrice: basicData[0].coldRolledPrice,
-        stainlessSteelPrice: basicData[0].stainlessSteelPrice,
-        galvanizedSteelPrice: basicData[0].galvanizedSteelPrice,
-        paintPrice: basicData[0].paintPrice,
-        comercializedRentability: basicData[0].comercializedRentability
+        coldrolledprice: basicData[0].coldrolledprice,
+        stainlesssteelprice: basicData[0].stainlesssteelprice,
+        galvanizedsteelprice: basicData[0].galvanizedsteelprice,
+        paintprice: basicData[0].paintprice,
+        comercializedrentability: basicData[0].comercializedrentability
       }
     return finalData;
   } catch (err) {

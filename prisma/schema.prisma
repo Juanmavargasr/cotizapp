@@ -13,35 +13,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model BasicData {
+model basicdata {
   id      Int    @id @default(autoincrement())
-  coldRolledPrice Int
-  stainlessSteelPrice Int
-  galvanizedSteelPrice  Int
-  paintPrice  Int
-  comercializedRentability  Float
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  coldrolledprice Int
+  stainlesssteelprice Int
+  galvanizedsteelprice  Int
+  paintprice  Int
+  comercializedrentability  Float
+  createdat DateTime @default(now())
+  updatedat DateTime @updatedAt
 }
 
-model Quotation {
+model quotation {
   id      Int    @id @default(autoincrement())
-  subtotalValueQuotation Int
-  taxValueQuoatation Int
-  finalValueQuotation Int
-  products                   Product[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  subtotalvaluequotation Int
+  taxvaluequoatation Int
+  finalvaluequotation Int
+  products                   product[]
+  createdat DateTime @default(now())
+  updatedat DateTime @updatedAt
 }
 
-model Product {
+model product {
   id      Int    @id @default(autoincrement())
   name String
-  subtotalValueProduct Int
-  taxValueProduct Int
-  finalValueProduct Int
-  quotationId              Int?
-  quotation                Quotation?               @relation(fields: [quotationId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  subtotalvalueproduct Int
+  taxvalueproduct Int
+  finalvalueproduct Int
+  quotationid              Int?
+  quotation                quotation?               @relation(fields: [quotationid], references: [id])
+  createdat DateTime @default(now())
+  updatedat DateTime @updatedAt
 }

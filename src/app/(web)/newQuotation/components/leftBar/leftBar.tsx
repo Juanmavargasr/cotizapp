@@ -120,7 +120,7 @@ const LeftBar = () => {
                 <div className="">
                   {product.id} - {product.name}
                 </div>
-                <div>Total before tax: {product.subtotalValueProduct}</div>
+                <div>Total before tax: {product.subtotalvalueproduct}</div>
               </div>
             </Link>
           ))}

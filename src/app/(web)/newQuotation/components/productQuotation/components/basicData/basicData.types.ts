@@ -1,7 +1,7 @@
 export type BasicDataTypes = {
-    coldRolledPrice: number;
-    stainlessSteelPrice: number;
-    galvanizedSteelPrice: number;
-    paintPrice: number;
-    comercializedRentability: number;
+  coldrolledprice: number;
+  stainlesssteelprice: number;
+  galvanizedsteelprice: number;
+  paintprice: number;
+  comercializedrentability: number;
   };

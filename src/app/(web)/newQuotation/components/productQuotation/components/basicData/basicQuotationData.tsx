@@ -66,11 +66,11 @@ const formSchema = z.object({
 });
 
 const BasicQuotationData = ({
-  coldRolledPrice,
-  stainlessSteelPrice,
-  galvanizedSteelPrice,
-  paintPrice,
-  comercializedRentability,
+  coldrolledprice,
+  stainlesssteelprice,
+  galvanizedsteelprice,
+  paintprice,
+  comercializedrentability,
 }: BasicDataTypes) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -101,7 +101,7 @@ const BasicQuotationData = ({
                       placeholder="shadcn"
                       {...field}
                       className="h-8"
-                      defaultValue={coldRolledPrice}
+                      defaultValue={coldrolledprice}
                     />
                   </FormControl>
                   <FormMessage />
@@ -122,7 +122,7 @@ const BasicQuotationData = ({
                       placeholder="shadcn"
                       {...field}
                       className="h-8"
-                      defaultValue={stainlessSteelPrice}
+                      defaultValue={stainlesssteelprice}
                     />
                   </FormControl>
                   <FormMessage />
@@ -143,7 +143,7 @@ const BasicQuotationData = ({
                       placeholder="shadcn"
                       {...field}
                       className="h-8"
-                      defaultValue={galvanizedSteelPrice}
+                      defaultValue={galvanizedsteelprice}
                     />
                   </FormControl>
                   <FormMessage />
@@ -164,7 +164,7 @@ const BasicQuotationData = ({
                       placeholder="shadcn"
                       {...field}
                       className="h-8"
-                      defaultValue={paintPrice}
+                      defaultValue={paintprice}
                     />
                   </FormControl>
                   <FormMessage />
@@ -185,7 +185,7 @@ const BasicQuotationData = ({
                       placeholder="shadcn"
                       {...field}
                       className="h-8"
-                      defaultValue={comercializedRentability * 100}
+                      defaultValue={comercializedrentability * 100}
                     />
                   </FormControl>
                   <FormMessage />

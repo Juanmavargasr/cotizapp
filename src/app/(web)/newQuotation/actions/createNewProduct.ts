@@ -7,11 +7,11 @@ export const createNewProduct = async (quotationId: number) => {
   try {
     const newProduct = await db.product.create({
         data: {
-            subtotalValueProduct: 0,
+          subtotalvalueproduct: 0,
             name: '',
-            taxValueProduct: 0, 
-            finalValueProduct: 0,
-            quotationId: quotationId,
+            taxvalueproduct: 0, 
+            finalvalueproduct: 0,
+            quotationid: quotationId,
         },
       });    
     return newProduct;

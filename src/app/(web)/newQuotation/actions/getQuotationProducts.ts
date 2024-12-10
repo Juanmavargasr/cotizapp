@@ -12,7 +12,7 @@ export const getQuotationProducts = async (quotationId: number) => {
     try {
     const products = await db.product.findMany({
         where: {
-          quotationId: quotationId, 
+          quotationid: quotationId, 
         },
       });
 

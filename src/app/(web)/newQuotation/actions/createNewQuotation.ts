@@ -7,9 +7,9 @@ export const createNewQuotation = async () => {
   try {
     const newQuotation = await db.quotation.create({
         data: {
-          subtotalValueQuotation: 0,
-          taxValueQuoatation: 0, 
-          finalValueQuotation: 0,
+          subtotalvaluequotation: 0,
+          taxvaluequoatation: 0, 
+          finalvaluequotation: 0,
         },
       });    
     return newQuotation;
