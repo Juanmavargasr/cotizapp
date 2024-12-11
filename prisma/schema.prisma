@@ -42,6 +42,20 @@ model product {
   finalvalueproduct Int
   quotationid              Int?
   quotation                quotation?               @relation(fields: [quotationid], references: [id])
+  basicdataquotations basicdataquotation[]
+  createdat DateTime @default(now())
+  updatedat DateTime @updatedAt
+}
+
+model basicdataquotation {
+  id      Int    @id @default(autoincrement())
+  coldrolledprice Int
+  stainlesssteelprice Int
+  galvanizedsteelprice  Int
+  paintprice  Int
+  comercializedrentability  Float
+  productid Int
+  product product? @relation(fields: [productid], references: [id], onDelete: Cascade)
   createdat DateTime @default(now())
   updatedat DateTime @updatedAt
 }

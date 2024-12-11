@@ -4,4 +4,4 @@ export type BasicDataTypes = {
   galvanizedsteelprice: number;
   paintprice: number;
   comercializedrentability: number;
-  };
+};

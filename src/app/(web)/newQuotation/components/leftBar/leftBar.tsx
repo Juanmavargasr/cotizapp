@@ -63,8 +63,10 @@ const LeftBar = () => {
         const handleDeleteProduct = async (productId: number) => {
           const deletedProduct = await deleteProduct(productId);
 
-          if (deletedProduct) {
+          if (deletedProduct.success) {
             toast.success(`Product ${productId}  successfully deleted`);
+          } else {
+            toast.error(`Product ${productId}  successfully deleted`);
           }
           setDeleteProductF(false);
           setProducts((prevProducts) =>

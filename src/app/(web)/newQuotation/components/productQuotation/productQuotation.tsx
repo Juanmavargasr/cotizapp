@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import {
   Accordion,
@@ -18,18 +20,37 @@ import OtherMaterialsData from "./components/otherMaterials/otherMaterialsTable"
 import SummaryTable from "./components/summary/summaryTable";
 import { getUpdatedBasicData } from "../../actions/getBasicData";
 import { BasicDataTypes } from "./components/basicData/basicData.types";
+import { getBasicDataQuotation } from "./components/basicData/actions/getBasicDataQuotation";
 
 const ProductQuotation = () => {
   const [basicData, setBasicData] = useState<BasicDataTypes | null>(null);
+  const [datakey, setDatakey] = useState(0);
 
+  const router = useRouter();
+
+  const searchParams = useSearchParams();
+
+  const productId =
+    searchParams.get("productId") !== null
+      ? parseInt(searchParams.get("productId")!, 10)
+      : 0;
+
+  //check after working that only need to take updated basic data if it had not been modified
   useEffect(() => {
-    const fetchBasicData = async () => {
-      const data = await getUpdatedBasicData();
-      // console.log("*******************************", data);
-      setBasicData(data);
+    const fetchBasicData = async (productid: number) => {
+      const data = await getBasicDataQuotation(productid);
+      if (data.success && data.data) {
+        setBasicData(data.data);
+        setDatakey(productid);
+      } else {
+        const data = await getUpdatedBasicData();
+        setBasicData(data);
+      }
+      // console.log("********AAAAA", data.data);
+      router.refresh();
     };
-    fetchBasicData();
-  }, []);
+    fetchBasicData(productId);
+  }, [productId, router]);
 
   return (
     <div>
@@ -53,6 +74,7 @@ const ProductQuotation = () => {
             </AccordionTrigger>
             <AccordionContent>
               <BasicQuotationData
+                key={datakey}
                 coldrolledprice={basicData?.coldrolledprice || 0}
                 stainlesssteelprice={basicData?.stainlesssteelprice || 0}
                 galvanizedsteelprice={basicData?.galvanizedsteelprice || 0}
@@ -60,6 +82,7 @@ const ProductQuotation = () => {
                 comercializedrentability={
                   basicData?.comercializedrentability || 0
                 }
+                productid={productId}
               />
             </AccordionContent>
           </AccordionItem>
