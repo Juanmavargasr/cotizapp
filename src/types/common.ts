@@ -32,3 +32,16 @@ export type basicDataQuotationTypes = {
   createdat?: string | Date;
   updatedat?: string | Date;
 };
+
+export type steelPartType = {
+  id?: number;
+  partName: string;
+  length: number;
+  width: number;
+  qty: number;
+  thickness: string;
+  bend: number;
+  weight?: number;
+  area?: number;
+  productid: number;
+};

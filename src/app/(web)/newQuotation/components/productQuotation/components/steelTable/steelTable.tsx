@@ -41,7 +41,23 @@ const SteelTable = () => {
         <div className="flex flex-col">
           <div className="flex flex-row justify-center gap-4">
             <p className="flex items-center">Part name</p>
-            <Input className="w-[400px]" />
+            <FormField
+              control={form.control}
+              name="partName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter part name"
+                      {...field}
+                      className="h-8 w-[400px]"
+                      value={field.value || ""}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
           <div className="flex flex-row mt-4 w-full p-4">
             <div className="flex flex-col w-[50%] gap-4">
@@ -60,7 +76,11 @@ const SteelTable = () => {
                           className="h-8"
                           defaultValue={"aaaa"}
                         /> */}
-                        <Select {...field}>
+                        <Select
+                          {...field}
+                          value={field.value}
+                          onValueChange={field.onChange}
+                        >
                           <SelectTrigger className="w-[180px] h-8">
                             <SelectValue placeholder="Select a material" />
                           </SelectTrigger>
@@ -154,7 +174,11 @@ const SteelTable = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Select {...field}>
+                        <Select
+                          {...field}
+                          value={field.value}
+                          onValueChange={field.onChange}
+                        >
                           <SelectTrigger className="w-[180px] h-8">
                             <SelectValue placeholder="Select a material" />
                           </SelectTrigger>

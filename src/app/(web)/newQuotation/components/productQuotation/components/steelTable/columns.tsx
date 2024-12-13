@@ -23,7 +23,7 @@ const materialValues = ["CR", "INOX", "GV", "PAINT"] as const;
 export const steelLineSchema = z.object({
   id: z.string().optional(),
   material: z.enum(materialValues, {
-    message: "Cold Rolled steel price must be at least 4 characters.",
+    message: "The material chosen must be on the list",
   }),
   partName: z.string(),
   length: z.preprocess((a) => {
@@ -38,7 +38,9 @@ export const steelLineSchema = z.object({
     const parsed = parseInt(z.string().parse(a), 10);
     return isNaN(parsed) ? undefined : parsed;
   }, z.number().int().positive().nonnegative()),
-  thickness: z.enum(thicknessValues, { message: " choose a correct thicknes" }),
+  thickness: z.enum(thicknessValues, {
+    message: " choose a correct thickness",
+  }),
   bend: z.preprocess((a) => {
     const parsed = parseInt(z.string().parse(a), 10);
     return isNaN(parsed) ? undefined : parsed;

@@ -43,6 +43,7 @@ model product {
   quotationid              Int?
   quotation                quotation?               @relation(fields: [quotationid], references: [id])
   basicdataquotations basicdataquotation[]
+  steelparts steelpart[]
   createdat DateTime @default(now())
   updatedat DateTime @updatedAt
 }
@@ -58,4 +59,19 @@ model basicdataquotation {
   product product? @relation(fields: [productid], references: [id], onDelete: Cascade)
   createdat DateTime @default(now())
   updatedat DateTime @updatedAt
+}
+
+model steelpart {
+  id Int  @id @default(autoincrement())
+  partName String
+  length Int
+  width Int
+  qty Int
+  thickness String
+  bend Int
+  weight Int
+  area Int
+  productid Int
+  product product? @relation(fields: [productid], references: [id], onDelete: Cascade)
+
 }
