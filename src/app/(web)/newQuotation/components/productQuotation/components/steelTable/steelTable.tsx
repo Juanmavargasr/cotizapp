@@ -31,8 +31,7 @@ const SteelTable = () => {
   });
 
   function onSubmit(values: z.infer<typeof steelLineSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+    console.log("****************** onSubmit working");
     console.log(values);
   }
 
@@ -94,6 +93,7 @@ const SteelTable = () => {
                           placeholder="choose a length"
                           {...field}
                           className="h-8 w-[180px]"
+                          value={field.value || ""}
                         />
                       </FormControl>
                       <FormMessage />
@@ -114,6 +114,7 @@ const SteelTable = () => {
                           placeholder="choose a width"
                           {...field}
                           className="h-8 w-[180px]"
+                          value={field.value || ""}
                         />
                       </FormControl>
                       <FormMessage />
@@ -136,6 +137,7 @@ const SteelTable = () => {
                           placeholder="choose a qty"
                           {...field}
                           className="h-8 w-[180px]"
+                          value={field.value || ""}
                         />
                       </FormControl>
                       <FormMessage />
@@ -158,11 +160,20 @@ const SteelTable = () => {
                           </SelectTrigger>
                           <SelectContent>
                             <SelectGroup>
-                              <SelectLabel>Material</SelectLabel>
+                              <SelectLabel>Thickness</SelectLabel>
                               <SelectItem value="24">24</SelectItem>
                               <SelectItem value="22">22</SelectItem>
                               <SelectItem value="20">20</SelectItem>
                               <SelectItem value="18">18</SelectItem>
+                              <SelectItem value="16">16</SelectItem>
+                              <SelectItem value="14">14</SelectItem>
+                              <SelectItem value="12">12</SelectItem>
+                              <SelectItem value="1/8">1/8</SelectItem>
+                              <SelectItem value="3/16">3/16</SelectItem>
+                              <SelectItem value="1/4">1/4</SelectItem>
+                              <SelectItem value="5/16">5/16</SelectItem>
+                              <SelectItem value="3/8">3/8</SelectItem>
+                              <SelectItem value="1/2">1/2</SelectItem>
                             </SelectGroup>
                           </SelectContent>
                         </Select>
@@ -185,6 +196,7 @@ const SteelTable = () => {
                           placeholder="choose a bend qty"
                           {...field}
                           className="h-8 w-[180px]"
+                          value={field.value || ""}
                         />
                       </FormControl>
                       <FormMessage />
