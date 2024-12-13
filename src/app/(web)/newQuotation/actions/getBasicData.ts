@@ -1,26 +1,22 @@
-'use server';
+"use server";
 
-import { db } from '@/server/db';
-
+import { db } from "@/server/db";
 
 export const getUpdatedBasicData = async () => {
   try {
-    const basicData = await db.basicdata.findMany({
-      
-      });
+    const basicData = await db.basicdata.findMany({});
 
-      const finalData =
-      {
-        coldrolledprice: basicData[0].coldrolledprice,
-        stainlesssteelprice: basicData[0].stainlesssteelprice,
-        galvanizedsteelprice: basicData[0].galvanizedsteelprice,
-        paintprice: basicData[0].paintprice,
-        comercializedrentability: basicData[0].comercializedrentability
-      }
+    const finalData = {
+      coldrolledprice: basicData[0].coldrolledprice,
+      stainlesssteelprice: basicData[0].stainlesssteelprice,
+      galvanizedsteelprice: basicData[0].galvanizedsteelprice,
+      paintprice: basicData[0].paintprice,
+      comercializedrentability: basicData[0].comercializedrentability,
+    };
     return finalData;
   } catch (err) {
     console.error(err);
-    throw new Error('Error getting users');
+    throw new Error("Error getting basic Data");
   }
 };
 
@@ -55,7 +51,7 @@ export const getUpdatedBasicData = async () => {
 //           createdAt: 'desc',
 //         },
 //       });
-  
+
 //       const finalUsers = users
 //         .filter((user: any) => user.role !== 'bizops' && user.role !== 'admin')
 //         .map((user: any) => {
@@ -64,7 +60,7 @@ export const getUpdatedBasicData = async () => {
 //           const month = String(date.getMonth() + 1).padStart(2, '0'); // Los meses en JavaScript son 0-indexed
 //           const day = String(date.getDate()).padStart(2, '0');
 //           const formattedDate = `${year}/${month}/${day}`;
-  
+
 //           return {
 //             id: user.id,
 //             name: user.name,
@@ -78,7 +74,7 @@ export const getUpdatedBasicData = async () => {
 //             contribution: user.yearly_contribution,
 //           };
 //         });
-  
+
 //       return finalUsers;
 //     } catch (err) {
 //       console.error(err);
