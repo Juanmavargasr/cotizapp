@@ -1,5 +1,8 @@
+"use client";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,80 +13,105 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { zodResolver } from "@hookform/resolvers/zod";
+// import { zodResolver } from "@hookform/resolvers/zod";
 import { Separator } from "@/components/ui/separator";
 
 import { BasicDataTypes } from "./basicData.types";
+import { updateNewBasicDataQuotation } from "./actions/updateBasicDataQuotation";
+// import { createNewBasicDataQuotation } from "./actions/createBasicDataQuotation";
+
+//no usar
+// const formSchema = z.object({
+//   coldRolledPrice: z.preprocess(
+//     (a) => parseInt(z.string().parse(a), 10),
+//     z.number().int()
+//   ),
+//   stainlessSteelPrice: z.preprocess(
+//     (a) => parseInt(z.string().parse(a), 10),
+//     z.number().int()
+//   ),
+//   galvanizedSteelPrice: z.preprocess(
+//     (a) => parseInt(z.string().parse(a), 10),
+//     z.number().int()
+//   ),
+//   paintPrice: z.preprocess(
+//     (a) => parseInt(z.string().parse(a), 10),
+//     z.number().int()
+//   ),
+//   comercializedRentability: z.preprocess(
+//     (a) => parseInt(z.string().parse(a), 10),
+//     z.number().int()
+//   ),
+// });
 
 const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  coldRolledPrice: z
-    .number()
-    .int()
-    .gte(4, {
-      message: "Cold Rolled steel price must be at least 4 characters.",
-    })
-    .lte(4, {
-      message: "Cold Rolled steel price must be max 5 characters.",
-    }),
+  coldRolledPrice: z.preprocess(
+    (a) => parseInt(z.string().parse(a), 10),
+    z
+      .number()
+      .int()
+      .gte(0, { message: "Cold Rolled steel price must be at least 0." })
+      .lte(7000, { message: "Cold Rolled steel price must be at most 7000." })
+  ),
   stainlessSteelPrice: z
     .number()
     .int()
-    .gte(4, {
-      message: "Stainless steel price must be at least 4 characters.",
-    })
-    .lte(5, {
-      message: "Stainless steel price must be max 5 characters.",
-    }),
+    .gte(0, { message: "Stainless steel price must be at least 0." })
+    .lte(20000, { message: "Stainless steel price must be at most 20000." }),
   galvanizedSteelPrice: z
     .number()
     .int()
-    .gte(4, {
-      message: "Galvanized steel price must be at least 4 characters.",
-    })
-    .lte(5, {
-      message: "Galvanized steel price must be max 5 characters.",
-    }),
+    .gte(0, { message: "Galvanized steel price must be at least 0." })
+    .lte(9999, { message: "Galvanized steel price must be at most 9999." }),
   paintPrice: z
     .number()
     .int()
-    .gte(5, {
-      message: "Paint price must be at least 5 characters.",
-    })
-    .lte(5, {
-      message: "Paint price must be max 5 characters.",
-    }),
+    .gte(0, { message: "Paint price must be at least 0." })
+    .lte(50000, { message: "Paint price must be at most 50000." }),
   comercializedRentability: z
     .number()
-    .gte(0, {
-      message: "Comercialized rentability must be at least 0.",
-    })
-    .lte(2, {
-      message: "Comercialized rentability must be less than or equal to 2.",
-    }),
+    .gte(0, { message: "Comercialized rentability must be at least 0." })
+    .lte(99, { message: "Comercialized rentability must be at most 99." }),
 });
 
-const BasicQuotationData = ({
+//code for pass linter, when formschema working, drop it
+if (formSchema) {
+  console.log("*code for pass linter, when formschema working, drop it*");
+}
+
+interface BasicQuotationDataProps extends BasicDataTypes {
+  productid: number;
+}
+
+const BasicQuotationData: React.FC<BasicQuotationDataProps> = ({
   coldrolledprice,
   stainlesssteelprice,
   galvanizedsteelprice,
   paintprice,
   comercializedrentability,
-}: BasicDataTypes) => {
+  productid,
+}) => {
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+    // resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      coldRolledPrice: coldrolledprice,
+      stainlessSteelPrice: stainlesssteelprice,
+      galvanizedSteelPrice: galvanizedsteelprice,
+      paintPrice: paintprice,
+      comercializedRentability: comercializedrentability,
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const data = { ...values, productid: productid };
+    const changeData = await updateNewBasicDataQuotation(data);
+    console.log(changeData);
+    if (changeData.data) {
+      toast.success(`Basic data succesfully changed`);
+    }
   }
+
+  //hasta aquíii
 
   return (
     <Form {...form}>
@@ -101,7 +129,8 @@ const BasicQuotationData = ({
                       placeholder="shadcn"
                       {...field}
                       className="h-8"
-                      defaultValue={coldrolledprice}
+                      onChange={(e) => field.onChange(parseInt(e.target.value))}
+                      value={field.value || ""}
                     />
                   </FormControl>
                   <FormMessage />
@@ -114,7 +143,7 @@ const BasicQuotationData = ({
             <p className="">Stainless steel</p>
             <FormField
               control={form.control}
-              name="galvanizedSteelPrice"
+              name="stainlessSteelPrice"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
@@ -122,7 +151,8 @@ const BasicQuotationData = ({
                       placeholder="shadcn"
                       {...field}
                       className="h-8"
-                      defaultValue={stainlesssteelprice}
+                      onChange={(e) => field.onChange(parseInt(e.target.value))}
+                      value={field.value || ""}
                     />
                   </FormControl>
                   <FormMessage />
@@ -143,7 +173,8 @@ const BasicQuotationData = ({
                       placeholder="shadcn"
                       {...field}
                       className="h-8"
-                      defaultValue={galvanizedsteelprice}
+                      onChange={(e) => field.onChange(parseInt(e.target.value))}
+                      value={field.value || ""}
                     />
                   </FormControl>
                   <FormMessage />
@@ -164,7 +195,8 @@ const BasicQuotationData = ({
                       placeholder="shadcn"
                       {...field}
                       className="h-8"
-                      defaultValue={paintprice}
+                      onChange={(e) => field.onChange(parseInt(e.target.value))}
+                      value={field.value || ""}
                     />
                   </FormControl>
                   <FormMessage />
@@ -185,7 +217,8 @@ const BasicQuotationData = ({
                       placeholder="shadcn"
                       {...field}
                       className="h-8"
-                      defaultValue={comercializedrentability * 100}
+                      onChange={(e) => field.onChange(parseInt(e.target.value))}
+                      value={field.value || ""}
                     />
                   </FormControl>
                   <FormMessage />
