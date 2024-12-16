@@ -92,7 +92,7 @@ const ProductQuotation = () => {
             </AccordionTrigger>
             <AccordionContent>
               <div className="container mx-auto py-10">
-                <SteelTable />
+                <SteelTable productid={productId} />
               </div>
             </AccordionContent>
           </AccordionItem>

@@ -34,7 +34,7 @@ export type basicDataQuotationTypes = {
 };
 
 export type steelPartType = {
-  id?: number;
+  id?: number | string;
   partName: string;
   length: number;
   width: number;
@@ -44,4 +44,6 @@ export type steelPartType = {
   weight?: number;
   area?: number;
   productid: number;
+  createdat?: string | Date;
+  updatedat?: string | Date;
 };

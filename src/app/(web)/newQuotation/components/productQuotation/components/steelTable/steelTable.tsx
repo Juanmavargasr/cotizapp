@@ -1,6 +1,9 @@
+"use client";
+
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -24,15 +27,46 @@ import {
 } from "@/components/ui/select";
 
 import { steelLineSchema } from "./columns";
+import { createSteelPart } from "./actions/createSteelPart";
+import { steelPartType } from "@/types/common";
+import { useEffect, useState } from "react";
+import { getSteelParts } from "./actions/getSteelParts";
 
-const SteelTable = () => {
+type steelTableProps = {
+  productid: number;
+};
+
+const SteelTable = ({ productid }: steelTableProps) => {
   const form = useForm<z.infer<typeof steelLineSchema>>({
     resolver: zodResolver(steelLineSchema),
   });
 
-  function onSubmit(values: z.infer<typeof steelLineSchema>) {
-    console.log("****************** onSubmit working");
-    console.log(values);
+  const [steelParts, setSteelParts] = useState<steelPartType[]>([]);
+
+  // ojo, está haciendo el fetch con cada renderización y debe hacerlo solo al cargar la primera vez el producto
+  useEffect(() => {
+    const findSteelParts = async (productid: number) => {
+      const foundSteelParts = await getSteelParts(productid);
+      if (foundSteelParts) {
+        setSteelParts(foundSteelParts.data);
+      }
+    };
+
+    findSteelParts(productid);
+  }, [productid]);
+
+  async function onSubmit(values: z.infer<typeof steelLineSchema>) {
+    const data = { ...values, productid: productid };
+
+    const steelPartCreated = await createSteelPart(data);
+
+    if (!steelPartCreated.success) {
+      toast.error("Error creating steel part");
+      throw new Error("Error creating steel part");
+    }
+
+    toast.success("melotoconcito");
+    steelParts.push(steelPartCreated.data);
   }
 
   return (

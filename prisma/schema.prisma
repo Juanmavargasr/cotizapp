@@ -62,7 +62,7 @@ model basicdataquotation {
 }
 
 model steelpart {
-  id Int  @id @default(autoincrement())
+  id      Int    @id @default(autoincrement())
   partName String
   length Int
   width Int
@@ -73,5 +73,6 @@ model steelpart {
   area Int
   productid Int
   product product? @relation(fields: [productid], references: [id], onDelete: Cascade)
-
+  createdat DateTime @default(now())
+  updatedat DateTime @updatedAt
 }
